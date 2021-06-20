@@ -1,0 +1,24 @@
+# http://mng.bz/0tIo and download the raw IMDB dataset. Uncompress it
+
+# Processing the labels of the raw IMDB data
+
+import os
+
+imdb_dir = '' #input imdb raw data
+
+train_dir = os.path.join(imdb_dir, 'train')
+
+labels = []
+texts = []
+
+for label_type in ['neg', 'pos']:
+  dir_name = os.path.join(train_dir, label_type)
+  for fname in os.listdir(dir_name):
+    if fname[-4:] == '.txt': #checks for .txt file
+      f = open(os.path.join(dir_name, fname)) #opens file
+      texts.append(f.read()) #appends the .txt file
+      f.close()
+      if label_type == 'neg':
+          labels.append(0) #if it has label 'neg' then 0 is added to the labels
+      else:
+         labels.append(1) #if it is 'pos' 1 is added to the labels

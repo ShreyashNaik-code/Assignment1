@@ -1,0 +1,16 @@
+#Using Keras for word-level one-hot encoding
+
+from keras.preprocessing.text import Tokenizer
+
+samples = ['The cat sat on the mat.', 'The dog ate my homework.']
+
+tokenizer = Tokenizer(num_words=1000) #creates tokenizer configured to take 1000 most common words
+
+tokenizer.fit_on_texts(samples) #builds the word index
+
+sequences = tokenizer.texts_to_sequences(samples) #turns strings into list of integer indices
+
+one_hot_results = tokenizer.texts_to_matrix(samples, mode='binary') #binary representation of one hot encoding
+
+word_index = tokenizer.word_index
+print('Found %s unique tokens.' % len(word_index))

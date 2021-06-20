@@ -1,0 +1,16 @@
+#Character-level one-hot encoding 
+import string
+
+samples = ['The cat sat on the mat.', 'The dog ate my homework.']
+
+characters = string.printable #all printable ASCII characters
+
+token_index = dict(zip(range(1, len(characters) + 1), characters)) #creates adictionary with characters and their unique values
+
+max_length = 50 #cuts off text after max length
+
+results = np.zeros((len(samples), max_length, max(token_index.keys()) + 1)) #Return a new array of given shape and type, filled with zeros
+for i, sample in enumerate(samples):
+  for j, character in enumerate(sample):
+    index = token_index.get(character)
+    results[i, j, index] = 1

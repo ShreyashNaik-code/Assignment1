@@ -1,0 +1,16 @@
+#Loading the IMDB data for use with an Embedding layer
+
+from keras.datasets import imdb
+
+from keras import preprocessing
+
+max_features = 10000 #number of words consider as features
+
+maxlen = 20 #cuts off text after max length
+
+#loads the data as list of integers
+(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
+
+#turns the list of integers into a 2d integer tensor of shape
+x_train = preprocessing.sequence.pad_sequences(x_train, maxlen=maxlen)
+x_test = preprocessing.sequence.pad_sequences(x_test, maxlen=maxlen)
